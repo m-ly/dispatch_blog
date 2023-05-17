@@ -1,0 +1,27 @@
+<div class="index-container">
+  
+  <div id='index-photo'>
+    <%= image_tag('/assets/black_coffee_mug.jpg', alt: 'coffee', id: 'index-img') %>
+  </div>
+
+  <h1>Articles</h1>
+
+  <%= Post.public_count %> articles & counting!
+
+  <div id="posts-container">
+    <table>
+    <% @posts.each do |post| %>
+        <% unless post.archived? %>
+          <tr>
+            <th><%= link_to post.title, post %></th>
+          </tr> 
+          <tr>
+            <tr class="article-time"> <%= post[:publish_date] %></tr>
+            <td><%= truncate_post(post.text) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  <div>
+</div>
+ 

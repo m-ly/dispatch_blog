@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "style", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= favicon_link_tag asset_path('/assets/coffee-cup.png') %>
+  </head>
+
+  <body>
+    <div id="page-container">
+     <div id="content">
+        <header>
+          <div class="header-wrapper">
+            <div class="header-items">
+              <%= image_tag('/assets/headset.png', alt: 'headset') %>
+        
+              <h1>Black Coffee Dispatch</h1>
+              <div class="quick-links">
+                <a href="/">Home</a>
+                <%if user_signed_in? %>
+                  <%= link_to 'New Post', new_post_path %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div id="coffee-img">
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    
+    <%= yield %>
+
+     <footer id="footer">
+        <ul>
+          <li> <a href="/contact">Contact</a></li>
+          <li><a href="/about">About</a></li>
+          <% if user_signed_in? %>
+            <div>Welcome <%= current_user.email %></div>
+            <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= button_to "Sign In", new_user_session_path %>
+          <% end %>
+        </ul>
+      </footer>
+  </body>
+</html>
